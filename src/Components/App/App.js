@@ -48,42 +48,55 @@ updatePlaylistName (newPlaylistName) {
   this.setState({playlistName: newPlaylistName});
 }
 
-savePlaylist() {
+async savePlaylist() {
   let trackURIs = this.state.playlistTracks.map(track => track.uri);
-  Spotify.savePlaylist(this.state.playlistName, trackURIs).then(() => {this.setState({
-    playlistName: 'New Playlist',
-    playlistTracks: []
-  })});
-  
-  
+  console.log(trackURIs);
+  try {
+    let saveSuccess = await Spotify.savePlaylist(this.state.playlistName, trackURIs);
+    if (saveSuccess.snapshot_id) {
+      this.setState({
+        playlistName: 'New Playlist',
+        playlistTracks: []
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    alert (error);
+  }
 }
 
+  
 async search(searchTerm) {
   let results = await Spotify.search(searchTerm);
   this.setState({searchResults: results});
 }
-
-
-  render () {
-    return (
-      <div>
-  <h1>Ja<span className="highlight">mmm</span>ing</h1>
-  <div className="App">
-    <SearchBar onSearch={this.search}/>
-    <div className="App-playlist">
-      <SearchResults searchResults={this.state.searchResults} 
-      onAdd={this.addTrack} />
-      <Playlist playlist={this.state.playlistName} 
-      playlistTracks={this.state.playlistTracks} 
-      onRemove={this.removeTrack}
-      onNameChange={this.updatePlaylistName}
-      onSave={this.savePlaylist} 
-      />
-    </div>
+ 
+render () {
+  return (
+    <div>
+<h1>Ja<span className="highlight">mmm</span>ing</h1>
+<div className="App">
+  <SearchBar onSearch={this.search}/>
+  <div className="App-playlist">
+    <SearchResults searchResults={this.state.searchResults} 
+    onAdd={this.addTrack} />
+    <Playlist playlist={this.state.playlistName} 
+    playlistTracks={this.state.playlistTracks} 
+    onRemove={this.removeTrack}
+    onNameChange={this.updatePlaylistName}
+    onSave={this.savePlaylist} 
+    />
   </div>
 </div>
-    )
-  }
+</div>
+  )
 }
+
+};
+
+
+
+  
+
 
 export default App;
