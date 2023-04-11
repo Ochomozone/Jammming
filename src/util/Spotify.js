@@ -51,7 +51,7 @@ const Spotify = {
     ,
 
     async savePlaylist (name, trackURIs) {
-      console.log('savePlaylist initiated');
+      // console.log('savePlaylist initiated');
       if (!(name && trackURIs)) {
         return;
       } else {
@@ -64,7 +64,7 @@ const Spotify = {
           const jsonResponse = await response.json();
           
           userID = jsonResponse.id;
-          console.log(userID);
+          // console.log(userID);
     
           const newPlaylistResponse = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
             headers: headers,
@@ -80,7 +80,7 @@ const Spotify = {
             body: JSON.stringify({uris: trackURIs})
           });
             Response = await Response.json();
-            console.log('Save successful');
+            // console.log('Save successful');
             return Response;
         } catch (error) {
           console.log(error);

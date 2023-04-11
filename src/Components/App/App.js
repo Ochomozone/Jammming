@@ -50,7 +50,7 @@ updatePlaylistName (newPlaylistName) {
 
 async savePlaylist() {
   let trackURIs = this.state.playlistTracks.map(track => track.uri);
-  console.log(trackURIs);
+  
   try {
     let saveSuccess = await Spotify.savePlaylist(this.state.playlistName, trackURIs);
     if (saveSuccess.snapshot_id) {
