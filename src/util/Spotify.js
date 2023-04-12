@@ -1,7 +1,7 @@
 
 
 const clientId = '6285d97a22334bc5a7a0f23b8ee1b57d' ;
-const redirectURI = "http://localhost:3000/" ;
+const redirectURI = "http://ochomozone_jammming.surge.sh" ;
 let userToken;
 const Spotify = {
   getAccessToken() {

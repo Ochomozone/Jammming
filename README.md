@@ -68,3 +68,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Using the app
+## Configuring the app to get access token from spotify.com
+ Log in to spotify and go to developers section. Create a new app and set the website to http://localhost:3000/.
+ Also set the redirect url to http://localhost:3000/ and additionally add any deployment servers you may want to use.
+ Copy the client ID and set it as the value of clientID in Spotify.js, line 3.
+ Enjoy.
