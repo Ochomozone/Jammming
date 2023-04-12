@@ -1,3 +1,13 @@
+# Using the app
+## Setting up your spotify access code
+1. Log in to spotify website and developers section.
+2. Create a new app and name it whatever you like.
+3. For the website url enter http://localhost:3000/.
+4. Enter http://localhost:3000/ in the redirect url prompt
+5. Copy the client ID from your spotify app's settings
+## Setting up this app to use your client ID
+Enter the clientID you copied from your spotify app and paste it in src/util/Spotify.js as a string value for the clientID variable on line 3
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
