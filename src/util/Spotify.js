@@ -1,20 +1,22 @@
 
 
 const clientId = '' ;
-const redirectURI = "http://ochomozone-jammming.surge.sh" ;
+const redirectURI = "http://localhost:3000" ;
 let userToken;
 const Spotify = {
   getAccessToken() {
     if (userToken) {
       return userToken;
     }
-    //check for access token match
-    const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
-    const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
-    if (accessTokenMatch && expiresInMatch) {
-      userToken = accessTokenMatch[1];
-      const expiresIn = Number(expiresInMatch[1]);
-      window.setTimeout(() => (userToken = ""), expiresIn * 1000);
+    // check for access token match
+    const accessToken = window.location.href.match(/access_token=([^&]*)/);
+    const expiresIn = window.location.href.match(/expires_in=([^&]*)/);
+    if (accessToken && expiresIn) {
+      userToken = accessToken[1];
+      const expiresInSecs = Number(expiresIn[1]);
+      const tokenExpiresAt = Date.now() + expiresInSecs * 1000;
+      const timeRemaining = tokenExpiresAt - Date.now();
+      window.setTimeout(() => (userToken = ""), timeRemaining);
       window.history.pushState("Access Token", null, "/");
       return userToken;
     } else {
@@ -22,6 +24,7 @@ const Spotify = {
       window.location = accessUrl;
     }
   },
+  
     
     async search (searchTerm) {
       //console.log('spotify search initated');
